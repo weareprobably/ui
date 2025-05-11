@@ -1,0 +1,13 @@
+---
+import { sql } from '../lib/neon';
+
+const response =  await  sql`SELECT id, name from tasks`;
+// const currentTime = response[0].current_time;
+
+console.log(response)
+---
+
+<h1>Tasks</h1>
+{response.map((task) => (
+  <li>{task.name}</li>
+))}
