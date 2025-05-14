@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Test from "../components/Test.svelte"
 import db from "../db"
 
 
@@ -13,6 +14,6 @@ const projects = await db.query.project.findMany({
 
 
 <Layout>
-
+<Test client:visible/>
 <code><pre>{JSON.stringify(projects, null, 2)}</pre></code>
 </Layout>
