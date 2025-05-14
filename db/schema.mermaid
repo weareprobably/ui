@@ -1,0 +1,75 @@
+---
+title: Channels 
+---
+%% Paste into https://mermaid.live/edit to visualize
+classDiagram
+direction TB
+    class Organization {
+	    +ID id
+	    +String name
+    }
+
+   class User {
+	    +ID id
+	    +String name
+    }
+
+    class Channel {
+	    +ID id
+	    +String name
+    }
+
+    class Post {
+	    +ID id
+	    +String name
+    }
+
+    class Tag {
+	    +ID id
+	    +String name
+    }
+
+    class OrganizationToUser {
+	    +ID OrganizationId
+	    +ID UserId
+    }
+
+    class OrganizationToChannel {
+	    +ID OrganizationId
+	    +ID TeamId
+    }
+
+    class ChannelToUser {
+	    +ID Id
+	    +ID Id
+    }
+
+    class ChannelToPost {
+	    +ID Id
+	    +ID Id
+    }
+
+    class UserToPost {
+	    +ID Id
+	    +ID Id
+    }
+
+    class PostToTag {
+	    +ID Id
+	    +ID Id
+    }
+
+
+    Organization -- OrganizationToUser
+    User -- OrganizationToUser
+    Organization -- OrganizationToChannel
+    Channel -- OrganizationToChannel
+    ChannelToUser -- Channel
+    ChannelToUser -- User
+    ChannelToPost -- Channel
+    ChannelToPost -- Post
+    UserToPost -- User
+    UserToPost -- Post
+    PostToTag -- Tag
+    PostToTag -- Post
+

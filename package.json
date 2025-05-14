@@ -9,11 +9,17 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/db": "^0.14.13",
     "@astrojs/netlify": "^6.3.2",
     "@astrojs/svelte": "^7.0.13",
     "@neondatabase/serverless": "^1.0.0",
     "astro": "^5.7.12",
+    "drizzle-orm": "^0.43.1",
+    "nanoid": "^5.1.5",
     "svelte": "^5.28.2",
     "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.1"
   }
 }
