@@ -3,16 +3,97 @@ import Layout from '../layouts/Layout.astro';
 import db from "../db"
 
 
-const projects = await db.query.project.findMany({
+const users = await db.query.users.findMany({
   with: {
-    tasks: true,
-  },
+    posts: {
+      with: {
+        post: true
+      }
+    },
+    channels: {
+      with: {
+        channel: true
+      }
+    }
+  }
 });
+
+const channels = await db.query.channels.findMany({
+  with: {
+    members: {
+      with: {
+        user: true
+      }
+    },
+    posts: {
+      with: {
+        post: true
+      }
+    }
+  }
+})
+
+const posts = await db.query.posts.findMany({
+  with: {
+    authors: {
+      with: {
+        user: true
+      }
+    },
+    tags: {
+      with: {
+        tag: true
+      }
+    },
+    channels: {
+      with: {
+        channel: true
+      }
+    }
+  }
+});
+
+const tags = await db.query.tags.findMany({
+  with: {
+    posts: {
+      with: {
+        post: true
+      }
+    }
+  }
+})
 
 ---
 
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+</style>
 
 <Layout>
+<div class="grid">
 
-<code><pre>{JSON.stringify(projects, null, 2)}</pre></code>
+  <code><pre>
+USERS
+{JSON.stringify(users, null, 2)}
+</pre></code>
+
+<code><pre>
+CHANNELS
+{JSON.stringify(channels, null, 2)}
+</pre></code>
+
+<code><pre>
+POSTS
+{JSON.stringify(posts, null, 2)}
+</pre></code>
+
+<code><pre>
+TAGS
+{JSON.stringify(tags, null, 2)}
+</pre></code>
+</div>
+
 </Layout>
