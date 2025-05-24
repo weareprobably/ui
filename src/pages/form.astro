@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import db from "../db"
+
+const users = await db.query.users.findMany();
+
+const channels = await db.query.channels.findMany()
+---
+
+<Layout>
+  <form>
+    <div>
+      <label>Post title: 
+        <input type="text" name="name">
+      </label>
+    </div>
+    <div>
+      <label>Channel: 
+        <select name="channelId">
+          {channels.map(channel => (<option value={channel.id}>{channel.name}</option>))}
+        </select>
+      </label>
+    </div>
+    <div>
+      <label>Author: 
+        <select name="authorId">
+          {users.map(user => (<option value={user.id}>{user.name}</option>))}
+        </select>
+      </label>
+    </div>
+    <div></div>
+    
+    <button type="submit">Submit</button>
+  </form>
+</Layout>
+
+<script>
+  import { actions } from 'astro:actions';
+  import { navigate } from 'astro:transitions/client';
+
+
+  const form = document.querySelector('form');
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const { error } = await actions.getGreeting(formData);
+    if (!error) navigate('/');
+  })
+  
+  </script>
