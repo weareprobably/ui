@@ -33,19 +33,21 @@ const channels = await db.query.channels.findMany()
     
     <button type="submit">Submit</button>
   </form>
-</Layout>
-
-<script>
-  import { actions } from 'astro:actions';
-  import { navigate } from 'astro:transitions/client';
 
 
-  const form = document.querySelector('form');
-  form?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const { error } = await actions.getGreeting(formData);
-    if (!error) navigate('/');
-  })
+  <script>
+    import { actions } from 'astro:actions';
+    import { navigate } from 'astro:transitions/client';
+    console.log("script from form")
   
-  </script>
+    const form = document.querySelector('form');
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const { error } = await actions.getGreeting(formData);
+      if (!error) navigate('/');
+    })
+    
+    </script>
+
+</Layout>
