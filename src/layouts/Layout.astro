@@ -5,7 +5,10 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Channels</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+		<title>Probably</title>
 	</head>
 	<body>
 		<slot />
@@ -13,10 +16,16 @@
 </html>
 
 <style>
+	:root {
+		--background: #F9A67C;
+		--text: #231611;
+	}
 	html,
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		background-color: var(--background);
+		color: var(--text);
 	}
 </style>

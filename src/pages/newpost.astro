@@ -1,53 +1,47 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import db from "../db"
+import Layout from '../layouts/Layout.astro';
+import Input from '../components/forms/Input.astro';
+import Form from "../components/forms/Form.astro";
+import Select from "../components/forms/Select.astro";
 
 const users = await db.query.users.findMany();
-
+const userOptions = users.map(user => ({label: user.name, value: user.id}))
 const channels = await db.query.channels.findMany()
+const channelOptions = channels.map(channel => ({label: channel.name, value: channel.id}))
+
 ---
 
-<Layout>
-  <form>
-    <h2>New post</h2>
-    <div>
-      <label>Post title: 
-        <input type="text" name="name">
-      </label>
-    </div>
-    <div>
-      <label>Channel: 
+<Layout class="hello">
+  <Form id="newpost" title="New post">
+    <Input label="Post title" name="name" placeholder="the best title ever"/>
+    <Select label="Channel" name="channelId" options={channelOptions}/>
+    <Select label="User" name="authorId" options={userOptions}/>
+      <!-- <label>Channel: 
         <select name="channelId">
           {channels.map(channel => (<option value={channel.id}>{channel.name}</option>))}
         </select>
       </label>
-    </div>
-    <div>
+
+
       <label>Author: 
         <select name="authorId">
           {users.map(user => (<option value={user.id}>{user.name}</option>))}
         </select>
-      </label>
-    </div>
-    <div></div>
-    
+      </label> -->
     <button type="submit">Submit</button>
-  </form>
-
+  </Form>
 
   <script>
     import { actions } from 'astro:actions';
     import { navigate } from 'astro:transitions/client';
-    console.log("script from form")
-  
     const form = document.querySelector('form');
     form?.addEventListener('submit', async (event) => {
       event.preventDefault();
       const formData = new FormData(form);
       const { error } = await actions.getGreeting(formData);
-      if (!error) navigate('/');
+      // if (!error) navigate('/');
     })
-    
-    </script>
+  </script>
 
 </Layout>

@@ -1,0 +1,46 @@
+---
+const { 
+  id = '', 
+  name = '', 
+  label = '', 
+  options= [],
+  value = '', 
+  required = false, 
+  disabled = false, 
+  type = 'text', 
+  class: className = '', 
+  ...rest 
+} = Astro.props;
+---
+
+<label for={id} class="text-input-label">
+  {label}
+  <select
+    id={id}
+    name={name}
+    value={value}
+    required={required}
+    disabled={disabled}
+    class={`text-input ${className}`}
+    {...rest}
+  >
+  {options.map(option => (<option value={option.value}>{option.label}</option>))}
+  </select>
+</label>
+
+<style>
+.text-input-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.text-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+</style>

@@ -1,0 +1,20 @@
+---
+const { 
+  id = '',
+  title = '',
+  class: className = '',
+  ...rest 
+} = Astro.props;
+---
+
+<form id={id} class:list={[ 'form', className ]} {...rest}>
+  <p>{className}</p>
+  {title && <p>{title}</p>}
+  <slot />
+</form>
+
+<style>
+.form {
+  background-color: azure;
+}  
+</style>
