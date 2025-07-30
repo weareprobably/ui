@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout>
+  <button id="login">Login</button>
+  <button id="logout">Logout</button>
+
+  <script>
+    const {signIn, signOut} = await import("../lib/auth-client")
+    document.querySelector("#login").onclick = () => signIn.email({
+      email: "email@email.com",
+      password: "password1234",
+    })
+    document.querySelector("#logout").onclick = () => signOut()
+  </script>
+</Layout>

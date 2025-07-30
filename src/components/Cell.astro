@@ -1,0 +1,25 @@
+---
+const { 
+  column, 
+  row 
+} = Astro.props;
+---
+<div class="Cell" style={{"--grid-column": column, "--grid-row": row}}>
+  <slot />
+</div>
+<style>
+
+.Cell {
+  --grid-column: span 1;
+  --grid-row: span 1;
+  --border: 1px solid var(--text);
+  grid-column: var(--grid-column);
+  grid-row: var(--grid-row);
+  border-block: var(--border);
+  border-inline: var(--border);
+  margin-inline-start: -1px;
+  
+  margin-block-end: -1px;
+  padding: 1rem;
+}
+</style>

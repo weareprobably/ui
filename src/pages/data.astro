@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+const collection = [
+  {
+    index: 0,
+    name: "first",
+    obj: {
+      foo: "bar"
+    }
+  },
+  {
+    index: 1,
+    name: "second"
+  }
+]
+---
+<Layout>
+<ul>
+  {collection.map(item => <li>
+    <span>{item.index}</span> | <span>{item.obj?.foo}</span>
+  </li>)}
+</ul>
+</Layout>
+</style>
