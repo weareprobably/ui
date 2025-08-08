@@ -13,6 +13,7 @@
     "@astrojs/netlify": "^6.3.2",
     "@astrojs/svelte": "^7.0.13",
     "@neondatabase/serverless": "^1.0.0",
+    "airtable": "^0.12.2",
     "astro": "^5.7.12",
     "better-auth": "^1.2.8",
     "drizzle-orm": "^0.43.1",

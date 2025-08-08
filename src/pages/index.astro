@@ -1,208 +1,162 @@
 ---
-import Layout from "@/layouts/Layout.astro"
+import Layout from "@/layouts/Layout.astro";
 ---
-<Layout>
-  <header class="Greeting">
-    <h1 class="Headline">From effort to outcome,<br />from outcome to impact.</h1>
-    <p class="Intro">Probably brings the entire flow of your business in one place, integrating your project managment, engagement tracking, and business reporting data together to give you an end-to-end picture of the health of your business.</p>
-    <div class="image-cell gantt">gantt</div>
-    <div class="image-cell pie">pie</div>
-    <div class="image-cell column">column</div>
-    <div class="image-cell line">line</div>
-  </header>
-  <section class="Feature reverse">
-    <h2 class="Feature_headline"><span class="eyebrow">Effort</span> Manage timelines and projects that set priorities across your business.</h2>
-    <p class="Feature_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    <div class="Feature_image"></div>
-  </section>
-  <section class="Feature">
-    <h2 class="Feature_headline"><span class="eyebrow">Outcomes</span> Observe signals and measure outcomes by integrating leading analytics platforms.</h2>
-    <p class="Feature_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    <div class="Feature_image"></div>
-  </section>
-  <section class="Feature reverse">
-    <h2 class="Feature_headline"><span class="eyebrow">Impact</span> Measure the impact your effort and outcomes have on what matters at the end of the day— your top and bottom lines.</h2>
-    <p class="Feature_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    <div class="Feature_image"></div>
-  </section>
-  <section class="Signup">
-    <h2 class="Signup_headline"><span class="eyebrow">Get started</span> Join the waitlist now for beta access and discounted pre-launch pricing.</h2>
-    <form class="Signup_form Form">
-      <div class="Form_field integrated">
-        <input class="Input" type="text" />
-        <button class="Button">Join the waitlist</button>
-        <label class="Checkbox_label">
-          <input type="checkbox"/>
-          Send me updates on how Probably is coming together. (We promise not to flood your inbox)
-        </label>
-      </div>
-      
 
+<Layout>
+  <main class="Homepage">
+    <header class="Greeting">
+      <h1 class="Headline">From effort to outcome,<br />from outcome to impact.</h1>
+      <p class="Intro">
+        Probably brings the entire flow of your business in one place, integrating your project managment, engagement tracking, and business reporting data together to give you an end-to-end picture of the health of your business.
+      </p>
+    </header>
+    <form class="Signup_form" id="signup">
+      <h2 class="Signup_headline">Join the waitlist now for beta access and discounted pre-launch pricing.</h2>
+      <input class="Email" type="email" name="email" value="cmoodychs@gmail.com" />
+      <button class="Submit" type="submit">Join the waitlist</button>
+      <div class="Subscribe">
+        <input type="checkbox" name="subscribe" />
+        <label for="subscribe">Send me updates on how Probably is coming together. (We promise not to flood your inbox)</label>
+      </div>
     </form>
-    <div class="Signup_image"></div>
-  </section>
+  </main>
+
+  <script>
+    import { actions } from "astro:actions";
+    const form = document.querySelector("#signup");
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const { error } = await actions.signUp(formData);
+    });
+  </script>
 </Layout>
 
 <style>
-
-.Greeting {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 1rem;
-  justify-content: center;
-  padding: 1rem;
-  grid-auto-rows: 1fr;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  margin: 3rem 3rem 1rem;
-}
-
-.Headline {
-  grid-column: 1 / 5;
-  grid-row: 2 / 3;
-  font-family: "freightdispcmp-pro", serif;
-  font-weight: 400;
-  font-size: 6rem;
-  line-height: .9;
-  margin: 0;
-  padding-block-end: .3em;
-  align-self: end;
-  height: auto;
-}
-
-.Intro {
-  grid-column: 1 / 5;
-  grid-row: 3 / 4;
-  font-weight: 200;
-  font-size: 1.75rem;
-  line-height: normal;
-  margin: 0;
-}
-
-.todo {
-  grid-column: 1/3;
-  grid-row: 1/2;
-}
-
-.gantt {
-  grid-column: 4/8;
-  grid-row: 1/2;
-}
-
-.pie {
-  grid-column: 7/8;
-  grid-row: 2/3;
-}
-
-.column {
-  grid-column: 5/7;
-  grid-row: 2/3;
-}
-
-.line {
-  grid-column: 6/8;
-  grid-row: 3/4;
-}
-
-.image-cell {
-  background-color: var(--color-text);
-}
-
-.Feature {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 1rem;
-  justify-content: center;
-  padding: 1rem;
-  grid-auto-rows: 1fr;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  margin: 1rem 3rem;
-  grid-template-areas: 
-    "headline headline headline image image image image"
-    "description description description image image image image";
-  &.reverse {
-    grid-template-areas: 
-      "image image image image headline headline headline"
-      "image image image image description description description";
+  .Homepage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "greeting ." "greeting ." "form .";
+    grid-gap: 1rem;
+    padding: 2rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    margin: 1rem;
+    min-height: calc(100vh - 2rem);
   }
-}
 
-.Feature_headline {
-  grid-area: headline;
-  font-family: "freightdispcmp-pro", serif;
-  font-weight: 400;
-  font-size: 4rem;
-  line-height: 1;
-  margin: 0;
-  padding-block-end: .3em;
-  align-self: end;
-  height: auto;
-  .eyebrow {
+  .Greeting {
+    grid-area: greeting;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: start;
+  }
+
+  .Headline {
+    font-family: "freightdispcmp-pro", serif;
+    font-weight: 400;
+    font-size: 6rem;
+    line-height: 0.9;
+    margin: 0;
+    padding-block-end: 0.3em;
+  }
+
+  .Intro {
+    grid-column: 1 / 5;
+    grid-row: 3 / 4;
+    font-weight: 200;
+    font-size: 1.5rem;
+    line-height: normal;
+    margin: 0;
+  }
+
+  .Signup_form {
+    grid-area: form;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "headline headline headline" "email email submit" "subscribe subscribe subscribe";
+    grid-auto-rows: auto;
+    gap: 1rem 0;
+    font-weight: 200;
+    font-size: 1.25rem;
+    line-height: normal;
+    margin: 0;
+  }
+
+  .Signup_headline {
+    grid-area: headline;
+    font-family: "freightdispcmp-pro", serif;
+    font-weight: 400;
+    font-size: 3rem;
+    line-height: 1;
+    height: min-content;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .Email {
+    grid-area: email;
+    font: normal 400 1.25rem/1 "freight-sans-pro";
+    padding-inline: 1.25rem;
+    background: var(--color-background);
+    color: var(--color-text);
+    border: var(--border);
+    &:focus {
+      background-color: white;
+    }
+  }
+
+  .Submit {
+    position: relative;
+    grid-area: submit;
+    font: normal 400 1.25rem/1 "freight-sans-pro";
+    padding-inline: 1.25rem;
+    background: var(--color-text);
+    color: var(--color-background);
+    border: var(--border);
+    cursor: pointer;
+    &::after {
+      --inset: 4px;
+      content: "";
+      position: absolute;
+      top: var(--inset);
+      bottom: var(--inset);
+      left: var(--inset);
+      right: var(--inset);
+      border: 0px solid white;
+    }
+    &:hover::after {
+      border-width: 1px;
+    }
+    &:focus::after {
+      border-width: 2px;
+    }
+  }
+
+  .Subscribe {
+    grid-area: subscribe;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  input[type="checkbox"] {
     display: block;
-    font-family: freight-text-pro;
-    font-size: 1rem;
+    appearance: none;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: var(--border);
+    &:checked {
+      background-color: var(--color-text);
+    }
   }
-}
 
-.Feature_description {
-  grid-area: description;
-  font-weight: 200;
-  font-size: 1.25rem;
-  line-height: normal;
-  margin: 0;
-}
-
-.Feature_image {
-  grid-area: image;
-  background-color: var(--color-text);
-}
-
-
-.Signup {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 1rem;
-  justify-content: center;
-  padding: 1rem;
-  grid-auto-rows: 1fr;
-  background-color: var(--color-background);
-  color: var(--color-text);
-  margin: 1rem 3rem;
-  grid-template-areas: 
-    "headline headline headline image image image image"
-    "form form form image image image image";
-}
-
-.Signup_headline {
-  grid-area: headline;
-  font-family: "freightdispcmp-pro", serif;
-  font-weight: 400;
-  font-size: 4rem;
-  line-height: 1;
-  text-wrap: balance;
-  margin: 0;
-  padding-block-end: .3em;
-  align-self: end;
-  height: auto;
-  .eyebrow {
+  .Subscribe label {
     display: block;
-    font-family: freight-text-pro;
-    font-size: 1rem;
   }
-}
-
-.Signup_form {
-  grid-area: form;
-  font-weight: 200;
-  font-size: 1.25rem;
-  line-height: normal;
-  margin: 0;
-}
-
-.Signup_image {
-  grid-area: image;
-  background-color: var(--color-text);
-}
-
 </style>
