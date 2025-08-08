@@ -38,8 +38,8 @@ export const server = {
       base("Signups").create([
         {
           fields: {
-            fldEN63o9N1knNdCr: "foo@bar.com",
-            fldWSCWOu8Qqd28rq: true,
+            fldEN63o9N1knNdCr: input.email,
+            fldWSCWOu8Qqd28rq: input.subscribe || false,
           },
         },
       ]);
